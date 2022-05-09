@@ -102,7 +102,7 @@ export const RentalPeriod = styled.View`
 
     border-bottom-width: 1px;
     border-bottom-color: ${({ theme }) => theme.colors.line};
-    padding-bottom: 16;
+    padding-bottom: 16px;
 `;
 
 export const CalendarIcon = styled.View`
