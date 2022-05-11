@@ -17,9 +17,9 @@ import {
 
 import { CarProps } from './types';
 
-export function Car({ data }: CarProps) {
+export function Car({ data, ...rest }: CarProps) {
     return (
-        <Container>
+        <Container {...rest}>
             <Details>
                 <Brand>{data.brand}</Brand>
                 <Name>{data.name}</Name>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 import { BackButton } from '../../components/BackButton';
 import { ImageSlider } from '../../components/ImageSlider';
@@ -26,10 +27,16 @@ import {
     Price,
     About,
     Accessories,
-    Footer
+    Footer,
 } from './styles';
 
 export function CarDetails() {
+    const navigation = useNavigation();
+
+    function handleConfirmRental() {
+        navigation.navigate('Scheduling');
+    }
+
     return (
         <Container>
             <Header>
@@ -58,21 +65,22 @@ export function CarDetails() {
                 </Details>
 
                 <Accessories>
-                    <Accessory name='380Km/h' icon={speedSvg}/>
-                    <Accessory name='3.2s' icon={accelerationSvg}/>
-                    <Accessory name='800 HP' icon={forceSvg}/>
-                    <Accessory name='Gasolina' icon={gasolineSvg}/>
-                    <Accessory name='Auto' icon={exchangeSvg}/>
-                    <Accessory name='2 pessoas' icon={peopleSvg}/>
+                    <Accessory name="380Km/h" icon={speedSvg} />
+                    <Accessory name="3.2s" icon={accelerationSvg} />
+                    <Accessory name="800 HP" icon={forceSvg} />
+                    <Accessory name="Gasolina" icon={gasolineSvg} />
+                    <Accessory name="Auto" icon={exchangeSvg} />
+                    <Accessory name="2 pessoas" icon={peopleSvg} />
                 </Accessories>
 
                 <About>
-                    Este é um automóvel esportivo. Surgiu do lendário touro de lide indultado na praca real Maestranza de Sevilla.
+                    Este é um automóvel esportivo. Surgiu do lendário touro de
+                    lide indultado na praca real Maestranza de Sevilla.
                 </About>
             </Content>
 
             <Footer>
-                <Button title='Confirmar' onPress={() => {}} />
+                <Button title="Escolher período do aluguel" onPress={handleConfirmRental} />
             </Footer>
         </Container>
     );

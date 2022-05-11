@@ -1,5 +1,6 @@
 import React from 'react';
-import { StatusBar, ListRenderItem } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { StatusBar } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 
 import Logo from '../../assets/logo.svg';
@@ -17,21 +18,26 @@ interface ICar {
         price: number;
     };
     thumbnail: string;
-};
+}
 
 export function Home() {
-    const carData = {
-            id: '1',
-            brand: 'audi',
-            name: 'RS 5 Coupé',
-            rent: {
-                period: 'ao dia',
-                price: 120,
-            },
-            thumbnail:
-                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnPaKOCq-C-wQ_j5LAXajH4_hm0FBHBsAaaA&usqp=CAU',
-        };
+    const navigation = useNavigation();
 
+    const carData = {
+        id: '1',
+        brand: 'audi',
+        name: 'RS 5 Coupé',
+        rent: {
+            period: 'ao dia',
+            price: 120,
+        },
+        thumbnail:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnPaKOCq-C-wQ_j5LAXajH4_hm0FBHBsAaaA&usqp=CAU',
+    };
+
+    function handleCarDetails() {
+        navigation.navigate('CarDetails');
+    }
     return (
         <Container>
             <StatusBar
@@ -47,9 +53,11 @@ export function Home() {
             </Header>
 
             <CarList
-                data={[1,2,3,4,5,6,7]}
-                keyExtractor={item => String(item)}
-                renderItem={({item}) => <Car data={carData}/>}
+                data={[1, 2, 3, 4, 5, 6, 7]}
+                keyExtractor={(item) => String(item)}
+                renderItem={({ item }) => (
+                    <Car data={carData} onPress={handleCarDetails} />
+                )}
             />
         </Container>
     );
