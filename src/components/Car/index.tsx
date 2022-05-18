@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Gasoline from '../../assets/gasoline.svg';
+import { getAccessoryIcon } from '../../util/getAccessoryIcon';
 
 import {
     Container,
@@ -18,6 +18,8 @@ import {
 import { CarProps } from './types';
 
 export function Car({ data, ...rest }: CarProps) {
+    const MotorIcon = getAccessoryIcon(data.fuel_type);
+
     return (
         <Container {...rest}>
             <Details>
@@ -31,7 +33,7 @@ export function Car({ data, ...rest }: CarProps) {
                     </Rent>
 
                     <Type>
-                        <Gasoline />
+                        <MotorIcon />
                     </Type>
                 </About>
             </Details>

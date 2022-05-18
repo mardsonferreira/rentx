@@ -6,8 +6,7 @@
     "start": "expo start --dev-client",
     "android": "expo run:android",
     "ios": "expo run:ios",
-    "web": "expo start --web",
-    "api": "json-server ./src/services/server.json --host 192.168.0.17 --port 3333 --delay 700"
+    "web": "expo start --web"
   },
   "dependencies": {
     "@expo-google-fonts/archivo": "^0.2.2",
