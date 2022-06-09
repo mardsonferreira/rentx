@@ -10,8 +10,9 @@ export function Button({
     title,
     color,
     enabled = true,
-    onPress,
     loading = false,
+    light = false,
+    onPress,
     ...rest
 }: ButtonProps) {
     const theme = useTheme();
@@ -27,7 +28,7 @@ export function Button({
             {loading ? (
                 <ActivityIndicator color={theme.colors.shape} />
             ) : (
-                <Title>{title}</Title>
+                <Title light={light}>{title}</Title>
             )}
         </Container>
     );

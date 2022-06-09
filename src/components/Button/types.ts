@@ -6,4 +6,9 @@ export interface ButtonProps extends RectButtonProps {
     enabled?: boolean;
     onPress: () => void;
     loading?: boolean;
+    light?: boolean;
+}
+
+export interface ButtonTextProps {
+    light: boolean;
 }
