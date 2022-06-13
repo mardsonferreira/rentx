@@ -37,3 +37,8 @@ export const Footer = styled.View`
 export const Separator = styled.View`
     height: 8px;
 `;
+export const Form = styled.View`
+    width: 100%;
+
+    margin: 64px 0;
+`;

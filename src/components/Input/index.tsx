@@ -1,13 +1,20 @@
 import React from 'react';
+import { useTheme } from 'styled-components';
+import { Feather } from '@expo/vector-icons';
 
-import {
-  Container
-} from './styles';
+import { Container } from './styles';
 
-export function Input(){
-  return (
-    <Container>
+import { InputProps } from './types';
 
-    </Container>
-  );
+export function Input({ iconName }: InputProps) {
+    const theme = useTheme();
+    return (
+        <Container>
+            <Feather
+                name={iconName}
+                size={24}
+                color={theme.colors.text_detail}
+            />
+        </Container>
+    );
 }
