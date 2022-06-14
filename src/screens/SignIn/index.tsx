@@ -1,5 +1,10 @@
 import React from 'react';
-import { StatusBar } from 'react-native';
+import {
+    StatusBar,
+    KeyboardAvoidingView,
+    TouchableWithoutFeedback,
+    Keyboard,
+} from 'react-native';
 import { useTheme } from 'styled-components';
 
 import { Button } from '../../components/Button';
@@ -20,55 +25,57 @@ export function SignIn() {
     const theme = useTheme();
 
     return (
-        <Container>
-            <StatusBar
-                barStyle="dark-content"
-                backgroundColor="transparent"
-                translucent
-            />
-            <Header>
-                <Title>Estamos{'\n'}Quase lá</Title>
-                <Subtitle>
-                    Faça seu login para começar{'\n'} uma experiência incrível
-                </Subtitle>
-            </Header>
+        <KeyboardAvoidingView behavior="position" enabled>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                <Container>
+                    <StatusBar
+                        barStyle="dark-content"
+                        backgroundColor="transparent"
+                        translucent
+                    />
+                    <Header>
+                        <Title>Estamos{'\n'}Quase lá</Title>
+                        <Subtitle>
+                            Faça seu login para começar{'\n'} uma experiência
+                            incrível
+                        </Subtitle>
+                    </Header>
 
-            <Form>
-                <Input
-                    iconName="mail"
-                    placeholder="E-mail"
-                    keyboardType="email-address"
-                    autoCorrect={false}
-                    autoCapitalize="none"
-                />
+                    <Form>
+                        <Input
+                            iconName="mail"
+                            placeholder="E-mail"
+                            keyboardType="email-address"
+                            autoCorrect={false}
+                            autoCapitalize="none"
+                        />
 
-                <Separator />
+                        <Separator />
 
-                <PasswordInput
-                    iconName="lock"
-                    placeholder="Senha"
-                />
-            </Form>
+                        <PasswordInput iconName="lock" placeholder="Senha" />
+                    </Form>
 
-            <Footer>
-                <Button
-                    title="Login"
-                    onPress={() => {}}
-                    enabled={false}
-                    loading={false}
-                />
+                    <Footer>
+                        <Button
+                            title="Login"
+                            onPress={() => {}}
+                            enabled={false}
+                            loading={false}
+                        />
 
-                <Separator />
+                        <Separator />
 
-                <Button
-                    title="Criar conta gratuita"
-                    color={theme.colors.background_secondary}
-                    onPress={() => {}}
-                    enabled={false}
-                    loading={false}
-                    light
-                />
-            </Footer>
-        </Container>
+                        <Button
+                            title="Criar conta gratuita"
+                            color={theme.colors.background_secondary}
+                            onPress={() => {}}
+                            enabled={false}
+                            loading={false}
+                            light
+                        />
+                    </Footer>
+                </Container>
+            </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
     );
 }
