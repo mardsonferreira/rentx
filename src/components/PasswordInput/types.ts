@@ -4,4 +4,9 @@ import { Feather } from '@expo/vector-icons';
 
 export interface InputProps extends TextInputProps {
     iconName: React.ComponentProps<typeof Feather>['name'];
+    value?: string;
+}
+
+export interface ContainerProps {
+    isFocused: boolean;
 }
