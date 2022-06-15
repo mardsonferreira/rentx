@@ -68,7 +68,7 @@ export function SignIn() {
                         <Button
                             title="Login"
                             onPress={() => {}}
-                            enabled={false}
+                            enabled={true}
                             loading={false}
                         />
 
@@ -77,8 +77,8 @@ export function SignIn() {
                         <Button
                             title="Criar conta gratuita"
                             color={theme.colors.background_secondary}
-                            onPress={() => {}}
-                            enabled={false}
+                            onPress={() => { console.log("ieeei")}}
+                            enabled={true}
                             loading={false}
                             light
                         />

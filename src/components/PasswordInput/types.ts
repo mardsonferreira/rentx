@@ -7,6 +7,6 @@ export interface InputProps extends TextInputProps {
     value?: string;
 }
 
-export interface ContainerProps {
-    isFocused: boolean;
+export interface Props {
+    isFocused?: boolean;
 }

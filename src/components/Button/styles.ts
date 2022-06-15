@@ -1,8 +1,17 @@
+import { ReactNode } from 'react';
 import styled from 'styled-components/native';
-import { RectButton, RectButtonProps } from 'react-native-gesture-handler';
+import { RectButton } from 'react-native-gesture-handler';
 import { RFValue } from 'react-native-responsive-fontsize';
 
-import { ButtonProps, ButtonTextProps } from './types';
+export interface ButtonProps {
+    color: string;
+    children: ReactNode;
+}
+
+export interface ButtonTextProps {
+    light: boolean;
+}
+
 
 export const Container = styled(RectButton)<ButtonProps>`
     width: 100%;
