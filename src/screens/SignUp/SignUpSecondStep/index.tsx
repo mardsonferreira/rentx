@@ -64,7 +64,11 @@ export function SignUpSecondStep() {
 
             await schema.validate(data);
 
-            // send data to API
+            navigation.navigate('Confirmation',{
+                nextScreenRoute: 'SignIn',
+                title: 'Conta criada!',
+                message: `Agora é só fazer login\ne aproveitar.`
+            })
         } catch (err) {
             if (err instanceof Yup.ValidationError) {
                 return Alert.alert('Opa', err.message);
