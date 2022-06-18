@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     KeyboardAvoidingView,
     TouchableWithoutFeedback,
     Keyboard,
+    Alert,
 } from 'react-native';
+import * as Yup from 'yup';
 import { useNavigation } from '@react-navigation/native';
 
 import { BackButton } from '../../../components/BackButton';
@@ -23,14 +25,40 @@ import {
 } from './styles';
 
 export function SignUpFirstStep() {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [driverLicence, setDriverLicence] = useState('');
+
     const navigation = useNavigation();
 
     function handleBack() {
         navigation.goBack();
     }
 
-    function handleNextStep() {
-        navigation.navigate("SignUpSecondStep");
+    async function handleNextStep() {
+        try {
+            const schema = Yup.object().shape({
+                driverLicence: Yup.string().required('CNH obrigatória.'),
+                email: Yup.string()
+                    .required('E-mail obrigatório.')
+                    .email('Digite um email válido'),
+                name: Yup.string().required('Name obrigatório.'),
+            });
+
+            const data = {
+                name,
+                email,
+                driverLicence,
+            };
+
+            await schema.validate(data);
+
+            navigation.navigate('SignUpSecondStep', { user: data });
+        } catch (err) {
+            if (err instanceof Yup.ValidationError) {
+                return Alert.alert('Opa', err.message);
+            }
+        }
     }
 
     return (
@@ -53,7 +81,12 @@ export function SignUpFirstStep() {
 
                     <Form>
                         <FormTitle>1.Dados</FormTitle>
-                        <Input iconName="user" placeholder="Nome" />
+                        <Input
+                            iconName="user"
+                            placeholder="Nome"
+                            onChangeText={setName}
+                            value={name}
+                        />
 
                         <Separator />
 
@@ -61,6 +94,8 @@ export function SignUpFirstStep() {
                             iconName="mail"
                             placeholder="E-mail"
                             keyboardType="email-address"
+                            onChangeText={setEmail}
+                            value={email}
                         />
 
                         <Separator />
@@ -69,6 +104,8 @@ export function SignUpFirstStep() {
                             iconName="credit-card"
                             placeholder="CNH"
                             keyboardType="numeric"
+                            onChangeText={setDriverLicence}
+                            value={driverLicence}
                         />
                     </Form>
 
