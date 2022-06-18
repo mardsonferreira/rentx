@@ -4,7 +4,9 @@ import {
     KeyboardAvoidingView,
     TouchableWithoutFeedback,
     Keyboard,
+    Alert,
 } from 'react-native';
+import * as Yup from 'yup';
 import { useTheme } from 'styled-components';
 
 import { Button } from '../../components/Button';
@@ -25,6 +27,28 @@ export function SignIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const theme = useTheme();
+
+    async function handleSignIn() {
+        const schema = Yup.object().shape({
+            email: Yup.string()
+                .required('E-mail obrigatório.')
+                .email('Digite um email válido'),
+            password: Yup.string().required('A senha obrigatória.'),
+        });
+
+        try {
+            await schema.validate({ email, password });
+        } catch (err) {
+            if (err instanceof Yup.ValidationError) {
+                Alert.alert('Opa', err.message);
+            } else {
+                Alert.alert(
+                    'Errou na autenticação',
+                    'Ocorreu um erro ao fazer login, verifique as credenciais'
+                );
+            }
+        }
+    }
 
     return (
         <KeyboardAvoidingView behavior="position" enabled>
@@ -67,7 +91,7 @@ export function SignIn() {
                     <Footer>
                         <Button
                             title="Login"
-                            onPress={() => {}}
+                            onPress={handleSignIn}
                             enabled={true}
                             loading={false}
                         />
@@ -77,7 +101,7 @@ export function SignIn() {
                         <Button
                             title="Criar conta gratuita"
                             color={theme.colors.background_secondary}
-                            onPress={() => { console.log("ieeei")}}
+                            onPress={() => {}}
                             enabled={true}
                             loading={false}
                             light
