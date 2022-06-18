@@ -8,5 +8,6 @@ declare namespace ReactNavigation {
         MyCars: NavigationStackProp<string>;
         SignIn: NavigationStackProp<string>;
         SignUpFirstStep: NavigationStackProp<string>;
+        SignUpSecondStep: NavigationStackProp<string>;
     }
 }

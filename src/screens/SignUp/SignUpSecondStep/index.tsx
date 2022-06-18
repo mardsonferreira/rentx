@@ -5,10 +5,10 @@ import {
     Keyboard,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useTheme } from 'styled-components';
 
 import { BackButton } from '../../../components/BackButton';
 import { Bullet } from '../../../components/Bullet';
-import { Input } from '../../../components/Input';
 import { Button } from '../../../components/Button';
 
 import {
@@ -21,16 +21,14 @@ import {
     FormTitle,
     Separator,
 } from './styles';
+import { PasswordInput } from '../../../components/PasswordInput';
 
-export function SignUpFirstStep() {
+export function SignUpSecondStep() {
     const navigation = useNavigation();
+    const theme = useTheme();
 
     function handleBack() {
         navigation.goBack();
-    }
-
-    function handleNextStep() {
-        navigation.navigate("SignUpSecondStep");
     }
 
     return (
@@ -52,27 +50,18 @@ export function SignUpFirstStep() {
                     </Subtitle>
 
                     <Form>
-                        <FormTitle>1.Dados</FormTitle>
-                        <Input iconName="user" placeholder="Nome" />
+                        <FormTitle>2. Senha</FormTitle>
+                        <PasswordInput iconName="lock" placeholder="Senha" />
 
                         <Separator />
 
-                        <Input
-                            iconName="mail"
-                            placeholder="E-mail"
-                            keyboardType="email-address"
-                        />
-
-                        <Separator />
-
-                        <Input
-                            iconName="credit-card"
-                            placeholder="CNH"
-                            keyboardType="numeric"
+                        <PasswordInput
+                            iconName="lock"
+                            placeholder="Repetir Senha"
                         />
                     </Form>
 
-                    <Button title="Próximo" onPress={handleNextStep} />
+                    <Button title="Cadastrar" color={theme.colors.success} />
                 </Container>
             </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
