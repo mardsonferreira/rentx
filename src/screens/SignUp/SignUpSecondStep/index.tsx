@@ -17,6 +17,8 @@ import { PasswordInput } from '../../../components/PasswordInput';
 
 import { RootStackParamList } from '../../../routes/rootStackParams';
 
+import api from '../../../services/api';
+
 import {
     Container,
     Header,
@@ -72,6 +74,13 @@ export function SignUpSecondStep() {
 
             await schema.validate(data);
 
+            await api.post('/users', {
+                name: user.name,
+                email: user.email,
+                driver_license: user.driverLicence,
+                password,
+            });
+
             navigation.navigate('Confirmation', {
                 nextScreenRoute: 'SignIn',
                 title: 'Conta criada!',
@@ -79,7 +88,9 @@ export function SignUpSecondStep() {
             });
         } catch (err) {
             if (err instanceof Yup.ValidationError) {
-                return Alert.alert('Opa', err.message);
+                Alert.alert('Opa', err.message);
+            } else {
+                Alert.alert('Opa', 'Não foi possível cadastrar');
             }
         }
     }
