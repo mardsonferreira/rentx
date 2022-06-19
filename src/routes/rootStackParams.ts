@@ -11,7 +11,9 @@ export type RootStackParamList = {
             driverLicence: string;
         };
     };
-    CarDetails: undefined;
+    CarDetails: {
+        car: CarDTO;
+    };
     Scheduling: {
         car: CarDTO;
     };

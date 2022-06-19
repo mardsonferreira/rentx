@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import { StatusBar, StyleSheet, BackHandler } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { Ionicons } from '@expo/vector-icons';
@@ -24,6 +25,8 @@ import { CarDTO } from '../../dtos/CarDTO';
 import { Car } from '../../components/Car';
 import { LoadAnimated } from '../../components/LoadAnimated';
 
+import { RootStackParamList } from '../../routes/rootStackParams';
+
 import { Container, Header, HeaderContent, TotalCars, CarList } from './styles';
 
 interface ICar {
@@ -37,10 +40,12 @@ interface ICar {
     thumbnail: string;
 }
 
+type SchedulingScreenProp = StackNavigationProp<RootStackParamList, 'Home'>;
+
 export function Home() {
     const [cars, setCars] = useState<CarDTO[]>([]);
     const [loading, setLoading] = useState(true);
-    const navigation = useNavigation();
+    const navigation = useNavigation<SchedulingScreenProp>();
     const theme = useTheme();
     const positionY = useSharedValue(0);
     const positionX = useSharedValue(0);
