@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import { StatusBar } from 'react-native';
 import { useTheme } from 'styled-components';
 import { format } from 'date-fns';
@@ -15,6 +16,8 @@ import { CarDTO } from '../../dtos/CarDTO';
 import ArrowSvg from '../../assets/arrow.svg';
 
 import { RentalPeriodProps } from './types';
+
+import { RootStackParamList } from '../../routes/rootStackParams';
 
 import {
     Container,
@@ -32,6 +35,11 @@ interface CarParams {
     car: CarDTO;
 }
 
+type SchedulingScreenProp = StackNavigationProp<
+    RootStackParamList,
+    'Scheduling'
+>;
+
 export function Scheduling() {
     const [lastSelectedDate, setLastSelectedDate] = useState<DayProps>(
         {} as DayProps
@@ -44,7 +52,7 @@ export function Scheduling() {
     );
 
     const theme = useTheme();
-    const navigation = useNavigation();
+    const navigation = useNavigation<SchedulingScreenProp>();
     const route = useRoute();
 
     const { car } = route.params as CarParams;

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Alert } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import { format } from 'date-fns';
 import { Feather } from '@expo/vector-icons';
 import { RFValue } from 'react-native-responsive-fontsize';
@@ -18,6 +19,8 @@ import { CarDTO } from '../../dtos/CarDTO';
 import { getAccessoryIcon } from '../../util/getAccessoryIcon';
 
 import api from '../../services/api';
+
+import { RootStackParamList } from '../../routes/rootStackParams';
 
 import {
     Container,
@@ -55,6 +58,11 @@ interface RentalPeriod {
     end: string;
 }
 
+type SchedulingDetailsScreenProp = StackNavigationProp<
+    RootStackParamList,
+    'SchedulingDetails'
+>;
+
 export function SchedulingDetails() {
     const [loading, setLoading] = useState(false);
     const [rentalPeriod, setRentalPeriod] = useState<RentalPeriod>(
@@ -62,7 +70,7 @@ export function SchedulingDetails() {
     );
 
     const theme = useTheme();
-    const navigation = useNavigation();
+    const navigation = useNavigation<SchedulingDetailsScreenProp>();
     const route = useRoute();
 
     const { car, dates } = route.params as CarParams;

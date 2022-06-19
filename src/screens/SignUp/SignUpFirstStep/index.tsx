@@ -7,11 +7,14 @@ import {
 } from 'react-native';
 import * as Yup from 'yup';
 import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 import { BackButton } from '../../../components/BackButton';
 import { Bullet } from '../../../components/Bullet';
 import { Input } from '../../../components/Input';
 import { Button } from '../../../components/Button';
+
+import { RootStackParamList } from '../../../routes/rootStackParams';
 
 import {
     Container,
@@ -24,12 +27,17 @@ import {
     Separator,
 } from './styles';
 
+type SignUpFirstStepScreenProp = StackNavigationProp<
+    RootStackParamList,
+    'SignUpFirstStep'
+>;
+
 export function SignUpFirstStep() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [driverLicence, setDriverLicence] = useState('');
 
-    const navigation = useNavigation();
+    const navigation = useNavigation<SignUpFirstStepScreenProp>();
 
     function handleBack() {
         navigation.goBack();

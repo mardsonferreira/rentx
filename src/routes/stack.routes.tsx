@@ -12,7 +12,9 @@ import { SignIn } from '../screens/SignIn';
 import { SignUpFirstStep } from '../screens/SignUp/SignUpFirstStep';
 import { SignUpSecondStep } from '../screens/SignUp/SignUpSecondStep';
 
-const { Navigator, Screen } = createStackNavigator();
+import { RootStackParamList } from './rootStackParams';
+
+const { Navigator, Screen } = createStackNavigator<RootStackParamList>();
 
 export function StackRoutes() {
     return (

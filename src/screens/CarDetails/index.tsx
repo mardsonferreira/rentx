@@ -1,6 +1,7 @@
 import React from 'react';
 import { StatusBar, StyleSheet } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 import { useTheme } from 'styled-components';
 
@@ -20,6 +21,8 @@ import { Button } from '../../components/Button';
 import { getAccessoryIcon } from '../../util/getAccessoryIcon';
 
 import { CarDTO } from '../../dtos/CarDTO';
+
+import { RootStackParamList } from '../../routes/rootStackParams';
 
 import {
     Container,
@@ -41,8 +44,13 @@ interface CarParams {
     car: CarDTO;
 }
 
+type CarDetailsScreenProp = StackNavigationProp<
+    RootStackParamList,
+    'CarDetails'
+>;
+
 export function CarDetails() {
-    const navigation = useNavigation();
+    const navigation = useNavigation<CarDetailsScreenProp>();
     const route = useRoute();
     const theme = useTheme();
     const { car } = route.params as CarParams;
@@ -133,9 +141,7 @@ export function CarDetails() {
                     ))}
                 </Accessories>
 
-                <About>
-                    {car.about}
-                </About>
+                <About>{car.about}</About>
             </Animated.ScrollView>
 
             <Footer>

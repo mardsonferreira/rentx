@@ -6,6 +6,7 @@ import {
     Alert,
 } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import { useTheme } from 'styled-components';
 import * as Yup from 'yup';
 
@@ -13,6 +14,8 @@ import { BackButton } from '../../../components/BackButton';
 import { Bullet } from '../../../components/Bullet';
 import { Button } from '../../../components/Button';
 import { PasswordInput } from '../../../components/PasswordInput';
+
+import { RootStackParamList } from '../../../routes/rootStackParams';
 
 import {
     Container,
@@ -33,11 +36,16 @@ interface Params {
     };
 }
 
+type SignUpSecondStepScreenProp = StackNavigationProp<
+    RootStackParamList,
+    'SignUpSecondStep'
+>;
+
 export function SignUpSecondStep() {
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
 
-    const navigation = useNavigation();
+    const navigation = useNavigation<SignUpSecondStepScreenProp>();
     const route = useRoute();
     const theme = useTheme();
 
@@ -64,11 +72,11 @@ export function SignUpSecondStep() {
 
             await schema.validate(data);
 
-            navigation.navigate('Confirmation',{
+            navigation.navigate('Confirmation', {
                 nextScreenRoute: 'SignIn',
                 title: 'Conta criada!',
-                message: `Agora é só fazer login\ne aproveitar.`
-            })
+                message: `Agora é só fazer login\ne aproveitar.`,
+            });
         } catch (err) {
             if (err instanceof Yup.ValidationError) {
                 return Alert.alert('Opa', err.message);

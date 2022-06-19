@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import {
     StatusBar,
     KeyboardAvoidingView,
@@ -14,6 +15,8 @@ import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
 import { PasswordInput } from '../../components/PasswordInput';
 
+import { RootStackParamList } from '../../routes/rootStackParams';
+
 import {
     Container,
     Header,
@@ -24,11 +27,13 @@ import {
     Separator,
 } from './styles';
 
+type SignInScreenProp = StackNavigationProp<RootStackParamList, 'SignIn'>;
+
 export function SignIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const theme = useTheme();
-    const navigation = useNavigation();
+    const navigation = useNavigation<SignInScreenProp>();
 
     async function handleSignIn() {
         const schema = Yup.object().shape({
@@ -52,8 +57,8 @@ export function SignIn() {
         }
     }
 
-    function handleNewAccount(){
-        navigation.navigate("SignUpFirstStep");
+    function handleNewAccount() {
+        navigation.navigate('SignUpFirstStep');
     }
 
     return (
