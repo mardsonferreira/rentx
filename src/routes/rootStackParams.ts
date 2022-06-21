@@ -1,7 +1,7 @@
 import { CarDTO } from '../dtos/CarDTO';
 
 export type RootStackParamList = {
-    Home: undefined;
+    Splash: undefined;
     SignIn: undefined;
     SignUpFirstStep: undefined;
     SignUpSecondStep: {
@@ -11,6 +11,7 @@ export type RootStackParamList = {
             driverLicence: string;
         };
     };
+    Home: undefined;
     CarDetails: {
         car: CarDTO;
     };
@@ -28,3 +29,9 @@ export type RootStackParamList = {
         nextScreenRoute: string;
     };
 };
+
+export type RootTabParamList = {
+    HomeTab: undefined;
+    Profile: undefined;
+    MyCars: undefined;
+}

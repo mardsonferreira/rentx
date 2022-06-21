@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 import BrandSvg from '../../assets/brand.svg';
 import LogoSvg from '../../assets/logo.svg';
+
+import { RootStackParamList } from '../../routes/rootStackParams';
 
 import Animated, {
     useSharedValue,
@@ -15,9 +18,14 @@ import Animated, {
 
 import { Container } from './styles';
 
+type SplashScreenProp = StackNavigationProp<
+    RootStackParamList,
+    'Splash'
+>;
+
 export function Splash() {
     const splashAnimation = useSharedValue(0);
-    const navigation = useNavigation();
+    const navigation = useNavigation<SplashScreenProp>();
     const brandStyle = useAnimatedStyle(() => {
         return {
             opacity: interpolate(splashAnimation.value, [0, 50], [1, 0]),
@@ -55,7 +63,7 @@ export function Splash() {
     });
 
     function startApp() {
-        navigation.navigate('Home');
+        navigation.navigate('SignIn');
     }
 
     useEffect(() => {
