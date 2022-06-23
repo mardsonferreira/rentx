@@ -39,18 +39,26 @@ export function Home() {
     }
 
     useEffect(() => {
+        let isUnmounted = false;
+
         async function fetchCars() {
             try {
                 const response = await api.get('/cars');
+                if (isUnmounted) return;
                 setCars(response.data);
             } catch (error) {
                 console.log(error);
             } finally {
+                if (isUnmounted) return;
                 setLoading(false);
             }
         }
 
         fetchCars();
+
+        return () => {
+            isUnmounted = true;
+        }
     }, []);
 
     return (
