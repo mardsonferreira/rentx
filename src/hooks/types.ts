@@ -1,16 +1,13 @@
 import React, { ReactNode } from 'react';
 
-interface User {
+export interface User {
     id: string;
+    user_id: string;
     email: string;
     name: string;
     driver_license: string;
     avatar: string;
-}
-
-export interface AuthState {
     token: string;
-    user: User;
 }
 
 export interface SignInCredentials {
