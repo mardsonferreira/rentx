@@ -15,6 +15,7 @@ function AuthProvider({ children }: AuthProviderProps) {
     const [data, setData] = useState<AuthState>({} as AuthState);
 
     async function signIn({ email, password }: SignInCredentials) {
+        console.log("AQUI")
         const response = await api.post('/sessions', {
             email,
             password,

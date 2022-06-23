@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import {
@@ -30,6 +30,8 @@ import {
 } from './styles';
 
 type SignInScreenProp = StackNavigationProp<RootStackParamList, 'SignIn'>;
+
+import { database } from '../../database';
 
 export function SignIn() {
     const [email, setEmail] = useState('');
@@ -66,6 +68,15 @@ export function SignIn() {
         navigation.navigate('SignUpFirstStep');
     }
 
+    useEffect(() => {
+        async function loadData() {
+            const userCollection = database.get('users');
+            const users = await userCollection.query().fetch();
+            console.log(users);
+        }
+
+        loadData();
+    }, [])
     return (
         <KeyboardAvoidingView behavior="position" enabled>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
