@@ -4,10 +4,10 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import {
     StatusBar,
     KeyboardAvoidingView,
-    TouchableWithoutFeedback,
     Keyboard,
     Alert,
 } from 'react-native';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import * as Yup from 'yup';
 import { useTheme } from 'styled-components';
 

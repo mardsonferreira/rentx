@@ -29,9 +29,7 @@ export const Subtitle = styled.Text`
     margin-top: 16px;
 `;
 
-export const Footer = styled.View`
-    
-`;
+export const Footer = styled.View``;
 
 export const Separator = styled.View`
     height: 8px;
