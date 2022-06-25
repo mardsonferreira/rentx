@@ -63,6 +63,24 @@ function AuthProvider({ children }: AuthProviderProps) {
         }
     }
 
+    async function updateUser(user: User) {
+        try {
+            const userCollection = database.get<ModelUser>('users');
+            await database.write(async () => {
+                const userSelected = await userCollection.find(user.id);
+                await userSelected.update((userData) => {
+                    (userData.name = user.name),
+                        (userData.driver_license = user.driver_license),
+                        (userData.avatar = user.avatar);
+                });
+            });
+
+            setData(user);
+        } catch (err) {
+            throw new Error(err);
+        }
+    }
+
     useEffect(() => {
         async function loadUserData() {
             const userCollection = database.get<ModelUser>('users');
@@ -85,7 +103,8 @@ function AuthProvider({ children }: AuthProviderProps) {
             value={{
                 user: data,
                 signIn,
-                signOut
+                signOut,
+                updateUser
             }}
         >
             {children}

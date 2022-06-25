@@ -19,6 +19,7 @@ export interface AuthContextData {
     user: User;
     signIn: (credentials: SignInCredentials) => Promise<void>;
     signOut: () => Promise<void>;
+    updateUser: (user: User) => Promise<void>;
 }
 
 export interface AuthProviderProps {
