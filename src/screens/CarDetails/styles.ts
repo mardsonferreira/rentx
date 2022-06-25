@@ -94,8 +94,8 @@ export const Footer = styled.View`
 `;
 
 export const OfflineInfo = styled.Text`
+    font-family: ${({ theme }) => theme.fonts.primary_400};
     color: ${({ theme }) => theme.colors.main};
-    font-family: ${({ theme }) => theme.fonts.secondary_500};
     font-size: ${RFValue(10)}px;
     text-align: center;
 `;

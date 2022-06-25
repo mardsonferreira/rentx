@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { KeyboardAvoidingView, Keyboard, Alert } from 'react-native';
+import { useNetInfo } from '@react-native-community/netinfo';
 import * as ImagePicker from 'expo-image-picker';
 import { useNavigation } from '@react-navigation/native';
 import { useTheme } from 'styled-components';
@@ -43,13 +44,24 @@ export function Profile() {
 
     const theme = useTheme();
     const navigation = useNavigation();
+    const netInfo = useNetInfo();
 
     function handleBack() {
         navigation.goBack();
     }
 
     function handleOptionChange(optionSelected: 'dataEdit' | 'passwordEdit') {
-        setOption(optionSelected);
+        if (
+            netInfo.isConnected === false &&
+            optionSelected === 'passwordEdit'
+        ) {
+            Alert.alert(
+                'Você está offline',
+                'Para mudar a senha, conecte-se a internet'
+            );
+        } else {
+            setOption(optionSelected);
+        }
     }
 
     async function handleSelectAvatar() {

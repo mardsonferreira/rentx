@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import { StatusBar } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useNetInfo } from '@react-native-community/netinfo';
@@ -11,18 +12,22 @@ import api from '../../services/api';
 import Logo from '../../assets/logo.svg';
 import { CarDTO } from '../../dtos/CarDTO';
 
+import { RootStackParamList } from '../../routes/rootStackParams';
+
 import { Car } from '../../components/Car';
 import { Car as ModelCar } from '../../database/model/Car';
 import { LoadAnimated } from '../../components/LoadAnimated';
 
 import { Container, Header, HeaderContent, TotalCars, CarList } from './styles';
 
+type HomeScreenProp = StackNavigationProp<RootStackParamList, 'Home'>;
+
 export function Home() {
     const [cars, setCars] = useState<ModelCar[]>([]);
     const [loading, setLoading] = useState(true);
 
     const netInfo = useNetInfo();
-    const navigation = useNavigation();
+    const navigation = useNavigation<HomeScreenProp>();
     const synchronizing = useRef(false);
 
     function handleCarDetails(car: CarDTO) {

@@ -41,7 +41,7 @@ import {
     About,
     Accessories,
     Footer,
-    OfflineInfo
+    OfflineInfo,
 } from './styles';
 
 interface CarParams {
@@ -94,7 +94,7 @@ export function CarDetails() {
 
     useEffect(() => {
         async function fetchOnlineData() {
-            const response = await api.get(`cars/${carId}`);
+            const response = await api.get(`/cars/${carId}`);
             setCar(response.data);
         }
 
@@ -105,93 +105,96 @@ export function CarDetails() {
 
     return (
         <Container>
-          <StatusBar
-            barStyle="dark-content"
-            translucent
-            backgroundColor="transparent"
-          />
-    
-          <Animated.View
-            style={[
-              headerStyleAnimation,
-              styles.header,
-              { backgroundColor: theme.colors.background_secondary }
-            ]}
-          >
-            <Header>
-              <BackButton onPress={handleBack} />
-            </Header>
-    
-            <Animated.View style={sliderCarStyleAnimation}>
-              <CarImages>
-                <ImageSlider
-                  imagesUrl={
-                    !!car.photos ?
-                      car.photos : [{ id: car.thumbnail, photo: car.thumbnail }]
-                  }
-                />
-              </CarImages>
-            </Animated.View>
-          </Animated.View>
-    
-          <Animated.ScrollView
-            contentContainerStyle={{
-              paddingHorizontal: 24,
-              paddingTop: getStatusBarHeight() + 160,
-            }}
-            showsVerticalScrollIndicator={false}
-            onScroll={scrollHandler}
-            scrollEventThrottle={16}
-          >
-            <Details>
-              <Description>
-                <Brand>{car.brand}</Brand>
-                <Name>{car.name}</Name>
-              </Description>
-    
-              <Rent>
-                <Period>{car.period}</Period>
-                <Price>R$ {netInfo.isConnected === true ? car.price : '...'}</Price>
-              </Rent>
-            </Details>
-    
-            {
-              car.accessories &&
-              <Accessories>
-                {
-                  car.accessories.map(accessory => (
-                    <Accessory
-                      key={accessory.id}
-                      name={accessory.name}
-                      icon={getAccessoryIcon(accessory.type)}
-                    />
-                  ))
-                }
-              </Accessories>
-            }
-    
-            <About>
-              {car.about}
-            </About>
-    
-          </Animated.ScrollView>
-    
-          <Footer>
-            <Button
-              title="Escolher período do aluguel"
-              onPress={handleConfirmRental}
-              enabled={netInfo.isConnected === true}
+            <StatusBar
+                barStyle="dark-content"
+                translucent
+                backgroundColor="transparent"
             />
-    
-            {
-              netInfo.isConnected === false &&
-              <OfflineInfo>
-                Conecte-se a internet para ver mais detalhes e agendar seu carro.
-              </OfflineInfo>
-            }
-          </Footer>
+
+            <Animated.View
+                style={[
+                    headerStyleAnimation,
+                    styles.header,
+                    { backgroundColor: theme.colors.background_secondary },
+                ]}
+            >
+                <Header>
+                    <BackButton onPress={handleBack} />
+                </Header>
+
+                <Animated.View style={sliderCarStyleAnimation}>
+                    <CarImages>
+                        <ImageSlider
+                            imagesUrl={
+                                !!car.photos
+                                    ? car.photos
+                                    : [
+                                          {
+                                              id: car.thumbnail,
+                                              photo: car.thumbnail,
+                                          },
+                                      ]
+                            }
+                        />
+                    </CarImages>
+                </Animated.View>
+            </Animated.View>
+
+            <Animated.ScrollView
+                contentContainerStyle={{
+                    paddingHorizontal: 24,
+                    paddingTop: getStatusBarHeight() + 160,
+                }}
+                showsVerticalScrollIndicator={false}
+                onScroll={scrollHandler}
+                scrollEventThrottle={16}
+            >
+                <Details>
+                    <Description>
+                        <Brand>{car.brand}</Brand>
+                        <Name>{car.name}</Name>
+                    </Description>
+
+                    <Rent>
+                        <Period>{car.period}</Period>
+                        <Price>
+                            R${' '}
+                            {netInfo.isConnected === true ? car.price : '...'}
+                        </Price>
+                    </Rent>
+                </Details>
+
+                {car.accessories && (
+                    <Accessories>
+                        {car.accessories.map((accessory) => (
+                            <Accessory
+                                key={accessory.id}
+                                name={accessory.name}
+                                icon={getAccessoryIcon(accessory.type)}
+                            />
+                        ))}
+                    </Accessories>
+                )}
+
+                <About>{car.about}</About>
+            </Animated.ScrollView>
+
+            <Footer>
+                <Button
+                    title="Escolher período do aluguel"
+                    onPress={handleConfirmRental}
+                    enabled={netInfo.isConnected === true}
+                />
+
+                {netInfo.isConnected === false && (
+                    <OfflineInfo>
+                        Conecte-se a internet para ver mais detalhes e agendar
+                        seu carro.
+                    </OfflineInfo>
+                )}
+            </Footer>
         </Container>
-      );
+    );
 }
 
 const styles = StyleSheet.create({

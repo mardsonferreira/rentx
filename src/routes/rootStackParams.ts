@@ -13,7 +13,7 @@ export type RootStackParamList = {
     };
     Home: undefined;
     CarDetails: {
-        car: CarDTO;
+        carId: string;
     };
     Scheduling: {
         car: CarDTO;
