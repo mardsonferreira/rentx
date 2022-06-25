@@ -128,12 +128,14 @@ export function CarDetails() {
                             imagesUrl={
                                 !!car.photos
                                     ? car.photos
-                                    : [
+                                    : car.thumbnail
+                                    ? [
                                           {
                                               id: car.thumbnail,
                                               photo: car.thumbnail,
                                           },
                                       ]
+                                    : []
                             }
                         />
                     </CarImages>
