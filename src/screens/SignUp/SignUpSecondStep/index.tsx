@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
-import {
-    KeyboardAvoidingView,
-    TouchableWithoutFeedback,
-    Keyboard,
-    Alert,
-} from 'react-native';
+import { KeyboardAvoidingView, Keyboard, Alert } from 'react-native';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useTheme } from 'styled-components';

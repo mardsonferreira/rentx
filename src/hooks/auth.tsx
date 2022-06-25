@@ -16,6 +16,7 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 function AuthProvider({ children }: AuthProviderProps) {
     const [data, setData] = useState<User>({} as User);
+    const [loading, setLoading] = useState(true);
 
     async function signIn({ email, password }: SignInCredentials) {
         try {
@@ -44,7 +45,7 @@ function AuthProvider({ children }: AuthProviderProps) {
             });
 
             setData({ ...user, token });
-        } catch (error) {
+        } catch (error: any) {
             throw new Error(error);
         }
     }
@@ -58,7 +59,7 @@ function AuthProvider({ children }: AuthProviderProps) {
             });
 
             setData({} as User);
-        } catch (err) {
+        } catch (err: any) {
             throw new Error(err);
         }
     }
@@ -76,7 +77,7 @@ function AuthProvider({ children }: AuthProviderProps) {
             });
 
             setData(user);
-        } catch (err) {
+        } catch (err: any) {
             throw new Error(err);
         }
     }
@@ -92,6 +93,7 @@ function AuthProvider({ children }: AuthProviderProps) {
                     'Authorization'
                 ] = `Bearer ${userData.token}`;
                 setData(userData);
+                setLoading(false);
             }
         }
 
@@ -102,9 +104,10 @@ function AuthProvider({ children }: AuthProviderProps) {
         <AuthContext.Provider
             value={{
                 user: data,
+                loading,
                 signIn,
                 signOut,
-                updateUser
+                updateUser,
             }}
         >
             {children}
