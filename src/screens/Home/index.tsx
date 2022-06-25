@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { StatusBar } from 'react-native';
+import { Alert, StatusBar } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
+import { useNetInfo } from '@react-native-community/netinfo';
 
 import Logo from '../../assets/logo.svg';
 
@@ -32,6 +33,8 @@ type SchedulingScreenProp = StackNavigationProp<RootStackParamList, 'Home'>;
 export function Home() {
     const [cars, setCars] = useState<CarDTO[]>([]);
     const [loading, setLoading] = useState(true);
+
+    const netInfo = useNetInfo();
     const navigation = useNavigation<SchedulingScreenProp>();
 
     function handleCarDetails(car: CarDTO) {
@@ -58,8 +61,16 @@ export function Home() {
 
         return () => {
             isUnmounted = true;
-        }
+        };
     }, []);
+
+    useEffect(() => {
+        if (netInfo.isConnected) {
+            Alert.alert('Você está on-line');
+        } else {
+            Alert.alert('Você está off-line');
+        }
+    }, [netInfo.isConnected]);
 
     return (
         <Container>
