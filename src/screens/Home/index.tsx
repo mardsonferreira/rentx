@@ -30,7 +30,7 @@ export function Home() {
     const navigation = useNavigation<HomeScreenProp>();
     const synchronizing = useRef(false);
 
-    function handleCarDetails(car: CarDTO) {
+    function handleCarDetails(car: ModelCar) {
         navigation.navigate('CarDetails', { carId: car.id });
     }
 
